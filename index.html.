@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHRÉO — Le réseau des fournisseurs CHR</title>
+
+  <style>
+    :root {
+      --vert: #345c49;
+      --vert-fonce: #20392d;
+      --fond: #f7f6f1;
+      --blanc: #fff;
+      --texte: #1d2924;
+      --gris: #6d7771;
+      --bordure: #e4e6df;
+      --or: #bd9a65;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--fond);
+      color: var(--texte);
+      font: 16px/1.6 Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .conteneur {
+      width: min(1120px, calc(100% - 36px));
+      margin: auto;
+    }
+
+    .bandeau {
+      padding: 8px;
+      background: var(--vert-fonce);
+      color: white;
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(247, 246, 241, .96);
+      border-bottom: 1px solid var(--bordure);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      color: var(--vert);
+      font: bold 28px Georgia, serif;
+    }
+
+    .logo span { color: var(--or); }
+
+    .liens {
+      display: flex;
+      gap: 26px;
+      color: var(--gris);
+      font-size: 14px;
+    }
+
+    .bouton {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid var(--vert);
+      border-radius: 4px;
+      background: var(--vert);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .bouton:hover { background: var(--vert-fonce); }
+
+    .hero {
+      padding: 65px 0;
+    }
+
+    .hero-grille {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 42px;
+    }
+
+    .surtitre {
+      color: var(--vert);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+    }
+
+    h1 {
+      margin: 16px 0;
+      font-size: clamp(44px, 6vw, 76px);
+      line-height: 1.02;
+    }
+
+    h1 em { color: var(--vert); }
+
+    .hero p {
+      max-width: 540px;
+      color: var(--gris);
+      font-size: 18px;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .recherche {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 8px;
+      margin-top: 28px;
+      padding: 10px;
+      background: white;
+      border: 1px solid var(--bordure);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--bordure);
+      border-radius: 3px;
+      background: white;
+      color: var(--texte);
+      font: inherit;
+    }
+
+    section { padding: 70px 0; }
+
+    .blanc { background: white; }
+
+    .entete-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin: 8px 0;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+    }
+
+    .entete-section p {
+      max-width: 470px;
+      color: var(--gris);
+    }
+
+    .categories, .fournisseurs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .categorie, .carte {
+      padding: 20px;
+      border: 1px solid var(--bordure);
+      border-radius: 5px;
+      background: white;
+    }
+
+    .categorie { cursor: pointer; }
+
+    .categorie:hover, .carte:hover {
+      border-color: #a8b8aa;
+      box-shadow: 0 12px 30px #20392d12;
+    }
+
+    .categorie strong { display: block; }
+
+    .categorie small, .carte p { color: var(--gris); }
+
+    .fournisseurs { grid-template-columns: repeat(3, 1fr); }
+
+    .carte {
+      display: flex;
+      min-height: 250px;
+      flex-direction: column;
+    }
+
+    .zone {
+      color: var(--vert);
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .carte h3 { margin: 14px 0 4px; font-size: 23px; }
+
+    .carte p { font-size: 14px; }
+
+    .carte-bas {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+
+    .lien {
+      color: var(--vert);
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .devis {
+      background: var(--vert-fonce);
+      color: white;
+    }
+
+    .devis-grille {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .devis p { color: #d2ddd5; }
+
+    .formulaire {
+      padding: 24px;
+      border-radius: 5px;
+      background: white;
+      color: var(--texte);
+    }
+
+    .formulaire h3 { margin: 0; font-size: 26px; }
+
+    .champs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .champ { display: grid; gap: 5px; }
+
+    .champ.large { grid-column: 1 / -1; }
+
+    label { font-size: 13px; font-weight: bold; }
+
+    textarea { min-height: 90px; resize: vertical; }
+
+    .note { color: var(--gris) !important; font-size: 12px; }
+
+    footer {
+      padding: 30px 0;
+      background: #17221d;
+      color: white;
+    }
+
+    .pied {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    footer small { color: #c1cbc3; }
+
+    @media (max-width: 800px) {
+      .hero-grille, .devis-grille { grid-template-columns: 1fr; }
+      .categories { grid-template-columns: repeat(2, 1fr); }
+      .fournisseurs { grid-template-columns: repeat(2, 1fr); }
+      .recherche { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      nav { flex-wrap: wrap; padding: 12px 0; }
+      .liens { order: 3; width: 100%; justify-content: space-between; gap: 8px; }
+      .liens a { font-size: 12px; }
+      .hero { padding: 42px 0; }
+      .hero img { height: 280px; }
+      .categories, .fournisseurs, .recherche, .champs { grid-template-columns: 1fr; }
+      .champ.large { grid-column: auto; }
+      .entete-section, .pied { display: block; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bandeau">LE RÉSEAU DES FOURNISSEURS CHR · FRANCE & SUISSE ROMANDE</div>
+
+  <header>
+    <nav class="conteneur">
+      <a class="logo" href="#">CHR<span>ÉO</span></a>
+
+      <div class="liens">
+        <a href="#categories">Catégories</a>
+        <a href="#fournisseurs">Fournisseurs</a>
+        <a href="#devis">Demander un devis</a>
+      </div>
+
+      <a class="bouton" href="#devis">Parler de mon besoin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-grille conteneur">
+        <div>
+          <span class="surtitre">Le bon partenaire, au bon endroit</span>
+          <h1>Tout le CHR.<br><em>Un réseau, enfin.</em></h1>
+          <p>
+            Trouvez des fournisseurs pour votre café, hôtel, restaurant,
+            traiteur ou métier de bouche. Comparez leurs spécialités et
+            préparez une demande de devis depuis un seul endroit.
+          </p>
+          <a class="bouton" href="#fournisseurs">Explorer les fournisseurs ↓</a>
+        </div>
+
+        <img
+          src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1400&q=85"
+          alt="Cuisine professionnelle lumineuse"
+        >
+      </div>
+
+      <div class="recherche conteneur">
+        <input id="recherche" type="search" placeholder="Rechercher un fournisseur…">
+
+        <select id="zone">
+          <option value="tout">France et Suisse romande</option>
+          <option value="france">France</option>
+          <option value="suisse">Suisse romande</option>
+        </select>
+
+        <select id="categorie">
+          <option value="tout">Toutes les catégories</option>
+          <option value="equipement">Équipement cuisine</option>
+          <option value="mobilier">Mobilier et arts de la table</option>
+          <option value="emballage">Emballage</option>
+          <option value="hygiene">Hygiène</option>
+          <option value="alimentaire">Alimentaire et boissons</option>
+        </select>
+
+        <button class="bouton" type="button" onclick="filtrer()">Rechercher</button>
+      </div>
+    </section>
+
+    <section class="blanc" id="categories">
+      <div class="conteneur">
+        <div class="entete-section">
+          <div>
+            <span class="surtitre">Vos besoins, réunis</span>
+            <h2>Les essentiels de votre établissement</h2>
+          </div>
+          <p>Du matériel de cuisine aux consommables, trouvez des professionnels spécialisés dans les métiers CHR.</p>
+        </div>
+
+        <div class="categories">
+          <a class="categorie" href="#fournisseurs" onclick="choisirCategorie('equipement')">♨<strong>Équipement cuisine</strong><small>Cuisson, froid, préparation</small></a>
+          <a class="categorie" href="#fournisseurs" onclick="choisirCategorie('mobilier')">◫<strong>Mobilier et salle</strong><small>Tables, chaises, agencement</small></a>
+          <a class="categorie" href="#fournisseurs" onclick="choisirCategorie('mobilier')">✧<strong>Arts de la table</strong><small>Vaisselle, verrerie, linge</small></a>
+          <a class="categorie" href="#fournisseurs" onclick="choisirCategorie('emballage')">▤<strong>Emballage</strong><small>Packaging, vente à emporter</small></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="fournisseurs">
+      <div class="conteneur">
+        <div class="entete-section">
+          <div>
+            <span class="surtitre">Le carnet CHRÉO</span>
+            <h2>Des fournisseurs à découvrir</h2>
+          </div>
+          <p>Cette première sélection s’appuie sur les offres présentées publiquement par les fournisseurs. Contactez-les pour confirmer leurs tarifs et leur zone de livraison.</p>
+        </div>
+
+        <div class="fournisseurs" id="liste">
+          <article class="carte" data-zone="france" data-cat="equipement mobilier" data-nom="nisbets france">
+            <span class="zone">France</span>
+            <h3>Nisbets France</h3>
+            <p>Matériel de cuisine, mobilier, arts de la table et fournitures pour les professionnels CHR.</p>
+            <div class="carte-bas"><a class="lien" href="https://www.nisbets.fr/" target="_blank">Site officiel ↗</a><button class="lien" onclick="devis('Nisbets France')">Demander un devis →</button></div>
+          </article>
+
+          <article class="carte" data-zone="france" data-cat="equipement" data-nom="furnotel">
+            <span class="zone">France</span>
+            <h3>Furnotel</h3>
+            <p>Équipements professionnels pour les cuisines et établissements de restauration.</p>
+            <div class="carte-bas"><a class="lien" href="https://www.furnotel.fr/" target="_blank">Site officiel ↗</a><button class="lien" onclick="devis('Furnotel')">Demander un devis →</button></div>
+          </article>
+
+          <article class="carte" data-zone="france" data-cat="equipement" data-nom="materiel-chr">
+            <span class="zone">France</span>
+            <h3>Matériel-CHR.fr</h3>
+            <p>Cuisson, froid, préparation et laverie pour la cuisine professionnelle.</p>
+            <div class="carte-bas"><a class="lien" href="https://www.materiel-chr.fr/" target="_blank">Site officiel ↗</a><button class="lien" onclick="devis('Matériel-CHR.fr')">Demander un devis →</button></div>
+          </article>
+
+          <article class="carte" data-zone="france suisse" data-cat="mobilier equipement" data-nom="lusini">
+            <span class="zone">France et Suisse</span>
+            <h3>LUSINI</h3>
+            <p>Mobilier, linge, vaisselle et accessoires pour l’hôtellerie-restauration.</p>
+            <div class="carte-bas"><a class="lien" href="https://www.lusini.com/fr-fr/" target="_blank">France ↗</a><a class="lien" href="https://www.lusini.com/fr-ch/" target="_blank">Suisse ↗</a></div>
+          </article>
+
+          <article class="carte" data-zone="france" data-cat="emballage" data-nom="embalpros">
+            <span class="zone">France</span>
+            <h3>Embalpros</h3>
+            <p>Emballages alimentaires et fournitures pour restaurants, traiteurs et métiers de bouche.</p>
+            <div class="carte-bas"><a class="lien" href="https://www.embalpros.fr/" target="_blank">Site officiel ↗</a><button class="lien" onclick="devis('Embalpros')">Demander un devis →</button></div>
+          </article>
+
+          <article class="carte" data-zone="suisse" data-cat="equipement" data-nom="cfm leman">
+            <span class="zone">Suisse romande</span>
+            <h3>CFM Leman</h3>
+            <p>Conception et équipement de cuisines professionnelles, notamment dans la région genevoise.</p>
+            <div class="carte-bas"><a class="lien" href="https://www.cfmleman.ch/" target="_blank">Site officiel ↗</a><button class="lien" onclick="devis('CFM Leman')">Demander un devis →</button></div>
+          </article>
+
+          <article class="carte" data-zone="suisse" data-cat="equipement" data-nom="cuisines professionnelles mieville">
+            <span class="zone">Suisse romande</span>
+            <h3>Miéville</h3>
+            <p>Vente et installation de matériel de restauration en Suisse romande.</p>
+            <div class="carte-bas"><a class="lien" href="https://cuisinesprofessionnelles.ch/vente-de-materiel" target="_blank">Site officiel ↗</a><button class="lien" onclick="devis('Cuisines Professionnelles Miéville')">Demander un devis →</button></div>
+          </article>
+
+          <article class="carte" data-zone="suisse" data-cat="emballage" data-nom="anselmi distribution">
+            <span class="zone">Suisse romande</span>
+            <h3>Anselmi Distribution</h3>
+            <p>Emballages et accessoires alimentaires pour restaurants, traiteurs et commerces.</p>
+            <div class="carte-bas"><a class="lien" href="https://www.anselmi-distribution.ch/" target="_blank">Site officiel ↗</a><button class="lien" onclick="devis('Anselmi Distribution')">Demander un devis →</button></div>
+          </article>
+
+          <article class="carte" data-zone="suisse" data-cat="hygiene" data-nom="acm hygiene">
+            <span class="zone">Suisse romande</span>
+            <h3>ACM Hygiène</h3>
+            <p>Produits d’hygiène et matériel de nettoyage pour les professionnels.</p>
+            <div class="carte-bas"><a class="lien" href="https://acmhygiene.com/" target="_blank">Site officiel ↗</a><button class="lien" onclick="devis('ACM Hygiène')">Demander un devis →</button></div>
+          </article>
+
+          <article class="carte" data-zone="suisse" data-cat="alimentaire" data-nom="saya professionnels">
+            <span class="zone">Suisse romande</span>
+            <h3>SAYA Professionnels</h3>
+            <p>Produits alimentaires, boissons et non-food pour les professionnels de la restauration.</p>
+            <div class="carte-bas"><a class="lien" href="https://saya.ch/professionnels/" target="_blank">Site officiel ↗</a><button class="lien" onclick="devis('SAYA Professionnels')">Demander un devis →</button></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="devis" id="devis">
+      <div class="devis-grille conteneur">
+        <div>
+          <span class="surtitre" style="color:#d7bd8c">Parlons de votre projet</span>
+          <h2>Un besoin précis ?<br>Demandez un devis.</h2>
+          <p>Décrivez votre établissement, votre zone et le matériel recherché. La demande sera préparée dans un e-mail adressé à CHRÉO.</p>
+        </div>
+
+        <div class="formulaire">
+          <h3>Ma demande</h3>
+          <form id="formDevis">
+            <div class="champs">
+              <div class="champ"><label for="societe">Établissement *</label><input id="societe" name="societe" required></div>
+              <div class="champ"><label for="nom">Votre nom *</label><input id="nom" name="nom" required></div>
+              <div class="champ"><label for="email">E-mail *</label><input id="email" name="email" type="email" required></div>
+              <div class="champ"><label for="telephone">Téléphone</label><input id="telephone" name="telephone" type="tel"></div>
+              <div class="champ"><label for="pays">Zone *</label><select id="pays" name="pays" required><option value="">Choisir</option><option>France</option><option>Suisse romande</option></select></div>
+              <div class="champ"><label for="besoin">Catégorie *</label><select id="besoin" name="besoin" required><option value="">Choisir</option><option>Équipement cuisine</option><option>Mobilier et arts de la table</option><option>Emballage</option><option>Hygiène</option><option>Alimentaire et boissons</option><option>Autre besoin CHR</option></select></div>
+              <div class="champ large"><label for="fournisseur">Fournisseur choisi</label><input id="fournisseur" name="fournisseur" placeholder="Tu peux aussi laisser ce champ vide"></div>
+              <div class="champ large"><label for="message">Décris ton besoin *</label><textarea id="message" name="message" required placeholder="Matériel recherché, quantité, ville, délai souhaité…"></textarea></div>
+            </div>
+            <p class="note">Le bouton prépare un e-mail à nicomartinonpro@gmail.com. Vérifie le message puis clique sur Envoyer dans ton application mail. Les devis sont établis par les fournisseurs.</p>
+            <button class="bouton" type="submit">Préparer ma demande de devis →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="pied conteneur">
+      <div><a class="logo" href="#" style="color:white">CHR<span>ÉO</span></a><br><small>Le réseau des fournisseurs CHR · France & Suisse romande</small></div>
+      <div>
+        <a href="mailto:nicomartinonpro@gmail.com">nicomartinonpro@gmail.com</a><br>
+        <a href="tel:+33652088679">06 52 08 86 79</a><br>
+        <small>SARL 2773 · SIRET 993 044 247 00019</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function filtrer() {
+      const texte = document.getElementById("recherche").value.toLowerCase();
+      const zone = document.getElementById("zone").value;
+      const categorie = document.getElementById("categorie").value;
+
+      document.querySelectorAll(".carte").forEach(carte => {
+        const bonNom = carte.dataset.nom.includes(texte);
+        const bonneZone = zone === "tout" || carte.dataset.zone.includes(zone);
+        const bonneCategorie = categorie === "tout" || carte.dataset.cat.includes(categorie);
+        carte.hidden = !(bonNom && bonneZone && bonneCategorie);
+      });
+    }
+
+    function choisirCategorie(categorie) {
+      document.getElementById("categorie").value = categorie;
+      setTimeout(filtrer, 0);
+    }
+
+    function devis(nomFournisseur) {
+      document.getElementById("fournisseur").value = nomFournisseur;
+      document.getElementById("devis").scrollIntoView({ behavior: "smooth" });
+    }
+
+    document.getElementById("formDevis").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const donnees = new FormData(event.target);
+      const sujet = `Demande de devis CHRÉO — ${donnees.get("societe")}`;
+      const message = [
+        `Établissement : ${donnees.get("societe")}`,
+        `Contact : ${donnees.get("nom")}`,
+        `E-mail : ${donnees.get("email")}`,
+        `Téléphone : ${donnees.get("telephone") || "Non indiqué"}`,
+        `Zone : ${donnees.get("pays")}`,
+        `Catégorie : ${donnees.get("besoin")}`,
+        `Fournisseur choisi : ${donnees.get("fournisseur") || "À déterminer"}`,
+        "",
+        `Besoin : ${donnees.get("message")}`
+      ].join("\n");
+
+      window.location.href =
+        `mailto:nicomartinonpro@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
+    });
+
+    document.getElementById("recherche").addEventListener("input", filtrer);
+    document.getElementById("zone").addEventListener("change", filtrer);
+    document.getElementById("categorie").addEventListener("change", filtrer);
+  </script>
+</body>
+</html>
